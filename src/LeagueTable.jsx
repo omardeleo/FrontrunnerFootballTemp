@@ -25,10 +25,10 @@ export default function CustomizedTables(props) {
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
     // console.log(event.currentTarget);
-    let thing = event.currentTarget.querySelector("td").innerText;
-    // console.log(thing);
-    getNextDate(fixtures);
-    setDada(thing);
+    let club = event.currentTarget.querySelector("td").innerText;
+    // console.log(club);
+    getNextMatch(fixtures, club);
+    setDada(club);
   };
 
   const handleClose = () => {
@@ -36,19 +36,16 @@ export default function CustomizedTables(props) {
     setFixt(null);
   };
 
-  const checkIfLivPlay = fixtures => {
+  const checkIfClubPlay = (fixtures, club) => {
     for (let i = 0; i < fixtures.length; i++) {
       let fixture = fixtures[i];
-      if (
-        fixture.homeTeam === "Liverpool" ||
-        fixture.awayTeam === "Liverpool"
-      ) {
+      if (fixture.homeTeam === club || fixture.awayTeam === club) {
         return fixture;
       }
     }
   };
 
-  const getNextDate = fixtures => {
+  const getNextMatch = (fixtures, club) => {
     // console.log('fx',fixtures);
 
     let fixtureDates = Object.keys(fixtures);
@@ -61,7 +58,7 @@ export default function CustomizedTables(props) {
       if (newDate > today) {
         // console.log("i", i);
         // console.log(fixtures[key])
-        let fixta = checkIfLivPlay(fixtures[key]);
+        let fixta = checkIfClubPlay(fixtures[key], club);
         if (fixta) {
           // console.log(fixta);
           // return fixta;
@@ -112,7 +109,8 @@ export default function CustomizedTables(props) {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   console.log(fixt);
-  const thinger = fixt ? fixt.awayTeam : null;
+  const homeTeam = fixt ? fixt.homeTeam : null;
+  const awayTeam = fixt ? fixt.awayTeam : null;
   const matchDate = fixt ? fixt.date : null;
   const matchTime = fixt ? fixt.time : null;
   return (
@@ -152,8 +150,9 @@ export default function CustomizedTables(props) {
             horizontal: "center"
           }}
         >
-          <h1>{thing(fixtures, dada)} vs </h1>
-          <h2>{thinger}</h2>
+          <h3>
+            {homeTeam} vs {awayTeam}{" "}
+          </h3>
           <div>{matchDate}</div>
           <div>{matchTime}</div>
         </Popover>
