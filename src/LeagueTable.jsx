@@ -6,7 +6,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
-
+import "./styles.css";
+import moment from "moment";
 function createData(position, team, gamesPlayed, points) {
   return { position, team, gamesPlayed, points };
 }
@@ -28,7 +29,6 @@ export default function CustomizedTables(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    setFixture(null);
   };
 
   const checkIfClubPlay = (fixtures, club) => {
@@ -63,6 +63,11 @@ export default function CustomizedTables(props) {
   const awayTeam = fixture ? fixture.awayTeam : null;
   const matchDate = fixture ? fixture.date : null;
   const matchTime = fixture ? fixture.time : null;
+  let dateStuff = matchDate ? matchDate.split("/") : null;
+  let str = dateStuff ? `${dateStuff[2]}${dateStuff[1]}${dateStuff[0]}` : null;
+  console.log(str);
+  let th = str ? moment(`${str} 11:30`, "YYYYMMDD hh:mm").fromNow() : null;
+  console.log(th);
   return (
     <Paper>
       <Table aria-label="customized table">
@@ -101,10 +106,9 @@ export default function CustomizedTables(props) {
           }}
         >
           <h3>
-            {homeTeam} vs {awayTeam}{" "}
+            <div>Next match {th}</div>
+            {homeTeam} vs {awayTeam}
           </h3>
-          <div>{matchDate}</div>
-          <div>{matchTime}</div>
         </Popover>
       </Table>
     </Paper>

@@ -8,11 +8,12 @@ import serieAFixtures from "./fixtures_serie_a.js";
 import laLigaFixtures from "./fixturesLaLiga.js";
 import bundesligaFixtures from "./fixturesBundesliga.js";
 import ligue1Fixtures from "./fixturesLigue1.js";
+import "./styles.css";
 
 import eredivisieFixtures from "./fixturesEredivisie.js";
 function ListOfTables() {
   return (
-    <div>
+    <div className="rabcont">
       <LeagueTable
         api={leagueAPI.premierLeague}
         tierLimit={5}

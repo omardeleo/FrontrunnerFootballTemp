@@ -5,9 +5,10 @@
   },
   "description": "https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/tables/CustomizedTables.js",
   "dependencies": {
-    "react-dom": "latest",
+    "@material-ui/core": "latest",
+    "moment": "2.24.0",
     "react": "latest",
-    "@material-ui/core": "latest"
+    "react-dom": "latest"
   },
   "keywords": [],
   "name": "frontrunnerfootball",
