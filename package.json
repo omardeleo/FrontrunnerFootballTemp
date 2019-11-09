@@ -10,7 +10,7 @@
     "@material-ui/core": "latest"
   },
   "keywords": [],
-  "name": "frontrunnerfootballplain",
+  "name": "frontrunnerfootball",
   "version": "0.0.160",
   "scripts": {
     "start": "react-scripts start",
