@@ -36,8 +36,10 @@ class LeagueTableContainer extends React.Component {
 
   render() {
     const { teams } = this.state;
-    const { tierLimit } = this.props;
-    return <LeagueTable teams={teams} tierLimit={tierLimit} />;
+    const { tierLimit, fixtures } = this.props;
+    return (
+      <LeagueTable teams={teams} tierLimit={tierLimit} fixtures={fixtures} />
+    );
   }
 }
 

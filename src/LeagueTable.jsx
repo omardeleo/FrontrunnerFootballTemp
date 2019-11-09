@@ -6,7 +6,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
-import { fixtures } from "./fixtures_prem.js";
 
 function createData(position, team, gamesPlayed, points) {
   return { position, team, gamesPlayed, points };
@@ -16,24 +15,20 @@ export default function CustomizedTables(props) {
   const rows = Object.entries(props.teams).map(([pos, team]) => {
     return createData(pos, team.name, team.gamesPlayed, team.points);
   });
-  const { tierLimit } = props;
+  const { tierLimit, fixtures } = props;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [dada, setDada] = React.useState(null);
-  const [fixt, setFixt] = React.useState(null);
+  const [fixture, setFixture] = React.useState(null);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
-    // console.log(event.currentTarget);
     let club = event.currentTarget.querySelector("td").innerText;
-    // console.log(club);
     getNextMatch(fixtures, club);
-    setDada(club);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setFixt(null);
+    setFixture(null);
   };
 
   const checkIfClubPlay = (fixtures, club) => {
@@ -46,73 +41,28 @@ export default function CustomizedTables(props) {
   };
 
   const getNextMatch = (fixtures, club) => {
-    // console.log('fx',fixtures);
-
     let fixtureDates = Object.keys(fixtures);
     for (let i = 0; i < fixtureDates.length; i++) {
       let key = fixtureDates[i];
       let dateStuff = key.split("/");
       let newDate = new Date(dateStuff[2], dateStuff[1] - 1, dateStuff[0]);
       let today = new Date();
-      // console.log("i", i);
       if (newDate > today) {
-        // console.log("i", i);
-        // console.log(fixtures[key])
         let fixta = checkIfClubPlay(fixtures[key], club);
         if (fixta) {
-          // console.log(fixta);
-          // return fixta;
-          setFixt(fixta);
+          setFixture(fixta);
           break;
         }
       }
     }
-
-    // for (let key of Object.keys(fixtures)) {
-    //   // console.log(key);
-    //   let dateStuff = key.split("/");
-    //   let newDate = new Date(dateStuff[2], dateStuff[1] - 1, dateStuff[0]);
-    //   // console.log(newDate);
-    //   let today = new Date();
-    //   if (newDate > today) {
-    //     // console.log(newDate)
-    //     // console.log(fixtures[key])
-    //     let fixs = fixtures[key];
-    //     console.log('fixs', fixs)
-    //     // console.log(fixs);
-    //     // fixs.forEach(fix => {
-    //     //   if (fix.homeTeam === "Liverpool" || fix.awayTeam === "Liverpool") {
-    //     //     // setFixt(fix);
-    //     //     return fix;
-    //     //   }
-    //     // });
-    //     for (let i = 0; i < fixs.length; i++) {
-    //       if (
-    //         fixs[i].homeTeam === "Liverpool" ||
-    //         fixs[i].awayTeam === "Liverpool"
-    //       ) {
-    //         // return setFixt(fixs[i]);
-    //         console.log('i',i)
-    //         console.log("ee", fixs[i]);
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
-  };
-
-  const thing = (fix, name) => {
-    // console.log(fix);
-    return name;
   };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  console.log(fixt);
-  const homeTeam = fixt ? fixt.homeTeam : null;
-  const awayTeam = fixt ? fixt.awayTeam : null;
-  const matchDate = fixt ? fixt.date : null;
-  const matchTime = fixt ? fixt.time : null;
+  const homeTeam = fixture ? fixture.homeTeam : null;
+  const awayTeam = fixture ? fixture.awayTeam : null;
+  const matchDate = fixture ? fixture.date : null;
+  const matchTime = fixture ? fixture.time : null;
   return (
     <Paper>
       <Table aria-label="customized table">

@@ -2743,31 +2743,34 @@ let data = {
   ]
 };
 
-function convertObjj(obj) {
-  if (obj.homeTeam === "Liverpool FC") {
-    obj.homeTeam = "Liverpool";
+function renameTeams(fixture) {
+  if (fixture.homeTeam === "Liverpool FC") {
+    fixture.homeTeam = "Liverpool";
   }
-  if (obj.awayTeam === "Liverpool FC") {
-    obj.awayTeam = "Liverpool";
+  if (fixture.awayTeam === "Liverpool FC") {
+    fixture.awayTeam = "Liverpool";
   }
-  if (obj.homeTeam === "Chelsea FC") {
-    obj.homeTeam = "Chelsea";
+  if (fixture.homeTeam === "Chelsea FC") {
+    fixture.homeTeam = "Chelsea";
   }
-  if (obj.awayTeam === "Chelsea FC") {
-    obj.awayTeam = "Chelsea";
+  if (fixture.awayTeam === "Chelsea FC") {
+    fixture.awayTeam = "Chelsea";
   }
-  if (obj.homeTeam === "Arsenal FC") {
-    obj.homeTeam = "Arsenal";
+  if (fixture.homeTeam === "Arsenal FC") {
+    fixture.homeTeam = "Arsenal";
   }
-  if (obj.awayTeam === "Arsenal FC") {
-    obj.awayTeam = "Arsenal";
+  if (fixture.awayTeam === "Arsenal FC") {
+    fixture.awayTeam = "Arsenal";
   }
-  return obj;
+  if (fixture.awayTeam === "Southampton FC") {
+    fixture.awayTeam = "Southampton";
+  }
+  return fixture;
 }
 
-for (let datum in data) {
-  let thing = data[datum];
-  thing.forEach(th => convertObjj(th));
+for (let fixture in data) {
+  let matches = data[fixture];
+  matches.forEach(match => renameTeams(match));
 }
 
-export const fixtures = data;
+export default data;
