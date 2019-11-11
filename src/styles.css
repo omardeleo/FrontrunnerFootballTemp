@@ -1,17 +1,14 @@
 .MuiPopover-paper {
-  background: pink !important;
+  /* background: pink !important; */
   max-width: calc(100% - 16px) !important;
   width: 100% !important;
-  /* padding: 0 !important;
-   */
   left: 8px !important;
-}
-
-.rabcont {
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
 .MuiPopover-root {
   /* width: 100% !important; */
+}
+
+* {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }

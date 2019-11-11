@@ -44,12 +44,20 @@ export default function CustomizedTables(props) {
     let fixtureDates = Object.keys(fixtures);
     for (let i = 0; i < fixtureDates.length; i++) {
       let key = fixtureDates[i];
+      // console.log("key", key);
       let dateStuff = key.split("/");
       let newDate = new Date(dateStuff[2], dateStuff[1] - 1, dateStuff[0]);
+      // console.log("newDate", newDate);
       let today = new Date();
-      if (newDate > today) {
+      today.setHours(0, 0, 0);
+      // console.log("today", today);
+      // console.log("newDate", newDate);
+      // console.log("isEqual?", today.getTime() === newDate.getTime());
+      if (newDate.getTime() >= today.getTime()) {
+        // console.log("stop");
         let fixta = checkIfClubPlay(fixtures[key], club);
         if (fixta) {
+          // console.log("fixta", fixta);
           setFixture(fixta);
           break;
         }
@@ -63,11 +71,27 @@ export default function CustomizedTables(props) {
   const awayTeam = fixture ? fixture.awayTeam : null;
   const matchDate = fixture ? fixture.date : null;
   const matchTime = fixture ? fixture.time : null;
+  let timeInfo = matchTime ? matchTime.split(":") : null;
   let dateStuff = matchDate ? matchDate.split("/") : null;
   let str = dateStuff ? `${dateStuff[2]}${dateStuff[1]}${dateStuff[0]}` : null;
-  console.log(str);
-  let th = str ? moment(`${str} 11:30`, "YYYYMMDD hh:mm").fromNow() : null;
-  console.log(th);
+  // console.log("matchTime", matchTime);
+  let newDate =
+    dateStuff && timeInfo
+      ? new Date(
+          dateStuff[2],
+          dateStuff[1] - 1,
+          dateStuff[0],
+          timeInfo[0] - 5,
+          timeInfo[1]
+        ).toLocaleString()
+      : null;
+  // console.log("newDate", newDate.toLocaleString());
+  // console.log(newDate);
+  // console.log("newDate", newDate);
+  // console.log(matchDate);
+  // console.log(str);
+  let momentDate = str ? moment(`${str}`, "YYYYMMDD hh:mm").fromNow() : null;
+  // console.log(momentDate);
   return (
     <Paper>
       <Table aria-label="customized table">
@@ -97,7 +121,7 @@ export default function CustomizedTables(props) {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: "bottom",
+            vertical: "top",
             horizontal: "center"
           }}
           transformOrigin={{
@@ -106,8 +130,9 @@ export default function CustomizedTables(props) {
           }}
         >
           <h3>
-            <div>Next match {th}</div>
+            <div>NEXT MATCH {momentDate}</div>
             {homeTeam} vs {awayTeam}
+            {newDate}
           </h3>
         </Popover>
       </Table>

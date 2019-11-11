@@ -2828,11 +2828,11 @@ function renameTeams(fixture) {
   if (fixture.awayTeam === "FC Nantes") {
     fixture.awayTeam = "Nantes";
   }
-  if (fixture.homeTeam === "Espanyol Barcelona") {
-    fixture.homeTeam = "Espanyol";
+  if (fixture.homeTeam === "Lille OSC") {
+    fixture.homeTeam = "Lille";
   }
-  if (fixture.awayTeam === "Espanyol Barcelona") {
-    fixture.awayTeam = "Espanyol";
+  if (fixture.awayTeam === "Lille OSC") {
+    fixture.awayTeam = "Lille";
   }
   return fixture;
 }

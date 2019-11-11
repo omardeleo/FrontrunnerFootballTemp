@@ -752,15 +752,6 @@ const fixtures = {
       awayTeam: "Valencia CF"
     }
   ],
-  "18/12/2019": [
-    {
-      date: "18/12/2019",
-      time: "20:00",
-      round: "10. Round",
-      homeTeam: "FC Barcelona",
-      awayTeam: "Real Madrid"
-    }
-  ],
   "29/10/2019": [
     {
       date: "29/10/2019",
